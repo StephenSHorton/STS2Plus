@@ -10,6 +10,7 @@ internal static class SpeedControlMainMenuPatch
 {
 	private static void Prefix()
 	{
+		ModEntry.Verbose("SpeedControl: main menu cleanup");
 		SpeedControlOverlay.SetMainMenuVisible(visible: true);
 		SpeedControlOverlay.Hide(resetSpeed: true);
 	}

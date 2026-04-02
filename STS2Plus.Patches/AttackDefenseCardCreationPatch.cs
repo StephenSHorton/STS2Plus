@@ -126,6 +126,7 @@ internal static class AttackDefenseCardCreationPatch
 
 	private static void Postfix(object? __result)
 	{
+		ModEntry.Verbose("AttackDefenseCardCreation: applying card stat bonuses");
 		CardRuleHelpers.TryApplyAttackDefenseBonuses(__result);
 	}
 }

@@ -167,6 +167,7 @@ internal static class UnlimitedGrowthMaxUpgradePatch
 		{
 			if (UnlimitedGrowthSafety.CanUseUnlimitedGrowth(__instance, __result) && __result < 99)
 			{
+				ModEntry.Verbose($"UnlimitedGrowthMaxUpgrade: removing upgrade cap originalMax={__result}");
 				__result = 99;
 			}
 			return;

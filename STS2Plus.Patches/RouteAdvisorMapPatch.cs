@@ -155,6 +155,7 @@ internal static class RouteAdvisorMapPatch
 		Node val = (Node)((__instance is Node) ? __instance : null);
 		if (val != null)
 		{
+			ModEntry.Verbose("RouteAdvisor: map update triggered");
 			RouteAdvisorHighlighter.Refresh(val);
 		}
 	}

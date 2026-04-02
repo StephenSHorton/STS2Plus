@@ -32,6 +32,7 @@ internal static class ConfigManager
 			{
 				Current = JsonSerializer.Deserialize<PlusConfig>(File.ReadAllText(ConfigPath), JsonOptions) ?? new PlusConfig();
 			}
+			ModEntry.Verbose($"Config: loaded — Speed={Current.SpeedControlEnabled} RouteAdvisor={Current.RouteAdvisorEnabled} QuickRestart={Current.QuickRestartEnabled} SkipIntro={Current.SkipIntroEnabled} MoreRules={Current.MoreRulesEnabled}");
 		}
 		catch (Exception ex)
 		{

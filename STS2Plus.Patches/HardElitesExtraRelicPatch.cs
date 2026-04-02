@@ -39,6 +39,7 @@ internal static class HardElitesExtraRelicPatch
 		}
 		if (num > 0)
 		{
+			ModEntry.Verbose($"HardElitesExtraRelic: adding extra relic drop existingRelics={num}");
 			list.Add(constructorInfo.Invoke(new object[1] { player }));
 		}
 	}

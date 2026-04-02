@@ -17,6 +17,7 @@ internal static class PlayerDamageCombatSetupPatch
 
 	private static void Postfix()
 	{
+		ModEntry.Verbose("PlayerDamage: combat setup, recalculating");
 		PlayerDamageTracker.Recalculate();
 	}
 }

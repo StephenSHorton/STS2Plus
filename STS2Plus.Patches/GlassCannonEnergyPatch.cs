@@ -19,6 +19,7 @@ internal static class GlassCannonEnergyPatch
 	{
 		if (PlusState.IsGlassCannonActive())
 		{
+			ModEntry.Verbose("GlassCannonEnergy: overriding energy to 4");
 			object playerFromCombatState = GameReflection.GetPlayerFromCombatState(__instance);
 			if (playerFromCombatState != null)
 			{

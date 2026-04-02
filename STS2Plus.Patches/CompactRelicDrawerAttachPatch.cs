@@ -11,6 +11,7 @@ internal static class CompactRelicDrawerAttachPatch
 {
 	private static void Postfix(NGlobalUi __instance, RunState runState)
 	{
+		ModEntry.Verbose("CompactRelicDrawer: attached to global UI");
 		CompactRelicDrawer.Attach(__instance, runState);
 	}
 }

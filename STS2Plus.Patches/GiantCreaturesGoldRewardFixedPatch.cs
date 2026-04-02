@@ -25,6 +25,7 @@ internal static class GiantCreaturesGoldRewardFixedPatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && ShouldBoostGold(player))
 		{
+			ModEntry.Verbose($"GiantCreaturesGoldFixed: boosting gold amount={amount} multiplier=2.0");
 			amount = GameReflection.ApplyGoldBonus(amount, 2.0m);
 		}
 	}

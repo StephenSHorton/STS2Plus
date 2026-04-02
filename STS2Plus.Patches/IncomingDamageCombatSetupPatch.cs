@@ -14,6 +14,7 @@ internal static class IncomingDamageCombatSetupPatch
 {
 	private static void Postfix(NCombatRoom __instance)
 	{
+		ModEntry.Verbose("IncomingDamage: combat setup, attaching overlays");
 		AttachPlayerSideOverlays((Node)(object)__instance);
 		IncomingDamageOverlay.RequestRefresh();
 	}

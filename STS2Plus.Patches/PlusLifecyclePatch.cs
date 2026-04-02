@@ -12,6 +12,7 @@ internal static class PlusLifecyclePatch
 {
 	private static void Prefix()
 	{
+		ModEntry.Verbose("Lifecycle: main menu reset (run end cleanup)");
 		AppliedTracker.Reset();
 		IncomingDamageTracker.Reset();
 		PlusState.ResetCombatDamage();

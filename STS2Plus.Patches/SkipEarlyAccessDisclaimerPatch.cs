@@ -13,6 +13,7 @@ internal static class SkipEarlyAccessDisclaimerPatch
 	{
 		if (ConfigManager.Current.SkipIntroEnabled)
 		{
+			ModEntry.Verbose("SkipIntro: EA disclaimer skipped");
 			SettingsSave settingsSave = SaveManager.Instance.SettingsSave;
 			settingsSave.SkipIntroLogo = true;
 			settingsSave.SeenEaDisclaimer = true;

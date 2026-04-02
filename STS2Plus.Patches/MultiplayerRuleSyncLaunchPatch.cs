@@ -10,6 +10,7 @@ internal static class MultiplayerRuleSyncLaunchPatch
 {
 	private static void Postfix()
 	{
+		ModEntry.Verbose("RuleSync: launch sync triggered");
 		if (!ConfigManager.Current.MoreRulesEnabled)
 		{
 			MultiplayerRuleSyncCoordinator.Detach();

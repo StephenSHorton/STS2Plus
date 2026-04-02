@@ -18,6 +18,13 @@ public class ModEntry : Node
 
 	public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } = new MegaCrit.Sts2.Core.Logging.Logger("STS2Plus", (LogType)0);
 
+	public static void Verbose(string message)
+	{
+		if (ConfigManager.Current.VerboseLoggingEnabled)
+			Logger.Info("[VERBOSE] " + message, 1);
+	}
+
+
 	public static void Initialize()
 	{
 		if (harmony == null)

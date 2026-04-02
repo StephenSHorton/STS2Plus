@@ -150,6 +150,7 @@ internal static class HardElitesPatch
 			int maxHp = GameReflection.GetMaxHp(__instance);
 			if (currentHp > 0 && maxHp > 0)
 			{
+				ModEntry.Verbose($"HardElites: scaling elite HP originalMax={maxHp} newMax={(int)Math.Round((decimal)maxHp * 1.5m, MidpointRounding.AwayFromZero)}");
 				GameReflection.SetCurrentHp(__instance, (int)Math.Round((decimal)currentHp * 1.5m, MidpointRounding.AwayFromZero));
 				GameReflection.SetMaxHp(__instance, (int)Math.Round((decimal)maxHp * 1.5m, MidpointRounding.AwayFromZero));
 			}

@@ -12,6 +12,7 @@ internal static class SkipIntroLogoPatch
 	{
 		if (ConfigManager.Current.SkipIntroEnabled)
 		{
+			ModEntry.Verbose("SkipIntro: intro logo skipped");
 			skipLogo = true;
 		}
 	}

@@ -25,6 +25,7 @@ internal static class HardElitesGoldRewardFixedPatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && ShouldBoostGold(player))
 		{
+			ModEntry.Verbose($"HardElitesGoldFixed: boosting gold amount={amount} multiplier=3.0");
 			amount = GameReflection.ApplyGoldBonus(amount, 3.0m);
 		}
 	}

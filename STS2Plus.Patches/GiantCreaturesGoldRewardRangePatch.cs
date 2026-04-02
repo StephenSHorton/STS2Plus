@@ -26,6 +26,7 @@ internal static class GiantCreaturesGoldRewardRangePatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && ShouldBoostGold(player))
 		{
+			ModEntry.Verbose($"GiantCreaturesGoldRange: boosting gold min={min} max={max} multiplier=2.0");
 			min = GameReflection.ApplyGoldBonus(min, 2.0m);
 			max = GameReflection.ApplyGoldBonus(max, 2.0m);
 		}

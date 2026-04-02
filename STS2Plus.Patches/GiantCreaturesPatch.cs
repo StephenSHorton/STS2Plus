@@ -150,6 +150,7 @@ internal static class GiantCreaturesPatch
 			int maxHp = GameReflection.GetMaxHp(__instance);
 			if (currentHp > 0 && maxHp > 0)
 			{
+				ModEntry.Verbose($"GiantCreatures: doubling creature HP originalMax={maxHp} newMax={maxHp * 2}");
 				GameReflection.SetCurrentHp(__instance, currentHp * 2);
 				GameReflection.SetMaxHp(__instance, maxHp * 2);
 			}

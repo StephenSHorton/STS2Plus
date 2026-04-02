@@ -411,6 +411,7 @@ internal static class RouteAdvisor
 		{
 			return null;
 		}
+		ModEntry.Verbose($"RouteAdvisor: advice generated, safe={ScoreSafe(readOnlyList ?? readOnlyList2!)} aggro={ScoreAggressive(readOnlyList2 ?? readOnlyList!)}");
 		return new RouteAdvice((readOnlyList == null) ? null : CreateSuggestion("Safe", routeStartPoint, readOnlyList, ScoreSafe(readOnlyList)), (readOnlyList2 == null) ? null : CreateSuggestion("Aggro", routeStartPoint, readOnlyList2, ScoreAggressive(readOnlyList2)));
 	}
 

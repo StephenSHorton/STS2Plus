@@ -31,6 +31,7 @@ internal static class QuickRestartPatch
 		InputEventKey val = (InputEventKey)(object)((inputEvent is InputEventKey) ? inputEvent : null);
 		if (val != null && val.Pressed && !val.Echo && ((long)val.Keycode == 4194336 || (long)val.PhysicalKeycode == 4194336) && !isRestarting && ConfigManager.Current.QuickRestartEnabled && GameReflection.IsRunActive())
 		{
+			ModEntry.Verbose("QuickRestart: F5 triggered");
 			if (GameReflection.IsMultiplayerRun())
 			{
 				MultiplayerQuickRestartCoordinator.RequestRestart();

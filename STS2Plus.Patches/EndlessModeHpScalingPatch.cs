@@ -155,6 +155,7 @@ internal static class EndlessModeHpScalingPatch
 			int maxHp = GameReflection.GetMaxHp(__instance);
 			if (currentHp > 0 && maxHp > 0)
 			{
+				ModEntry.Verbose($"EndlessModeHpScaling: scaling enemy HP maxHp={maxHp} multiplier={endlessHpMultiplier}");
 				GameReflection.SetCurrentHp(__instance, Math.Max(1, (int)Math.Round((decimal)currentHp * endlessHpMultiplier, MidpointRounding.AwayFromZero)));
 				GameReflection.SetMaxHp(__instance, Math.Max(1, (int)Math.Round((decimal)maxHp * endlessHpMultiplier, MidpointRounding.AwayFromZero)));
 			}

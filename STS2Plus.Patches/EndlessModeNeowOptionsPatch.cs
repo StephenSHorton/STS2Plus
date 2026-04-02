@@ -24,6 +24,7 @@ internal static class EndlessModeNeowOptionsPatch
 	{
 		if (PlusState.IsEndlessModeActive())
 		{
+			ModEntry.Verbose($"EndlessModeNeowOptions: replacing Neow options count={__result?.Count ?? 0}");
 			EnsureStartedWithNeowFlag();
 			if ((__result?.Count ?? 0) <= 0 && TryRestoreNeowOptions(__instance, out IReadOnlyList<EventOption> fallback))
 			{

@@ -17,6 +17,7 @@ internal static class SpeedControlCombatSetupPatch
 
 	private static void Postfix()
 	{
+		ModEntry.Verbose("SpeedControl: combat speed setup");
 		SpeedControlOverlay.SetMainMenuVisible(visible: false);
 		SpeedControlOverlay.Show();
 	}

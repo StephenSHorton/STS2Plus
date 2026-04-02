@@ -275,6 +275,10 @@ internal sealed class CompactRelicDrawer : Control
 			SyncToLegacyPosition(legacyInventory);
 			RefreshDisplay(rebuildGrid: true);
 			((CanvasItem)this).Visible = true;
+			((Node)this).SetProcess(true);
+			((Node)this).SetProcessInput(true);
+			if (summaryButton != null)
+				((Control)summaryButton).MouseFilter = (Control.MouseFilterEnum)0;
 		}
 	}
 
@@ -297,9 +301,18 @@ internal sealed class CompactRelicDrawer : Control
 			((Control)legacyInventory).MouseFilter = (Control.MouseFilterEnum)1;
 			((Control)legacyInventory).FocusMode = (Control.FocusModeEnum)2;
 			((Control)legacyInventory).FocusBehaviorRecursive = (FocusBehaviorRecursiveEnum)0;
-			((CanvasItem)this).Visible = false;
-			ClosePopup();
 		}
+		ClosePopup();
+		((CanvasItem)this).Visible = false;
+		((Node)this).SetProcess(false);
+		((Node)this).SetProcessInput(false);
+		if (summaryButton != null)
+			((Control)summaryButton).MouseFilter = (Control.MouseFilterEnum)2;
+		if (backstop != null)
+			((Control)backstop).MouseFilter = (Control.MouseFilterEnum)2;
+		if (popupPanel != null)
+			((Control)popupPanel).MouseFilter = (Control.MouseFilterEnum)2;
+		ModEntry.Verbose("CompactRelicDrawer: disabled, input processing stopped");
 	}
 
 	private void SyncToLegacyPosition(NRelicInventory inventory)
@@ -958,16 +971,9 @@ internal sealed class CompactRelicDrawer : Control
 		if (TryGetInstance(globalUi, out CompactRelicDrawer drawer))
 		{
 			drawer.RestoreLegacyInventory();
-			return;
 		}
-		NRelicInventory relicInventory = globalUi.RelicInventory;
-		if (relicInventory != null && GodotObject.IsInstanceValid((GodotObject)(object)relicInventory))
-		{
-			((CanvasItem)relicInventory).Visible = true;
-			((Control)relicInventory).MouseFilter = (Control.MouseFilterEnum)1;
-			((Control)relicInventory).FocusMode = (Control.FocusModeEnum)2;
-			((Control)relicInventory).FocusBehaviorRecursive = (FocusBehaviorRecursiveEnum)0;
-		}
+		// If no drawer was ever created, don't touch the legacy inventory —
+		// we never modified it, so there's nothing to restore.
 	}
 
 	private static void PruneInvalidInstances()

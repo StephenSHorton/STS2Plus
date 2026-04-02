@@ -11,6 +11,7 @@ internal static class BuildCreatorEncounterReplacementPatch
 {
 	private static void Prefix(ref EncounterModel encounter, IRunState? runState)
 	{
+		ModEntry.Verbose($"BuildCreatorEncounter: checking encounter replacement type={encounter?.GetType().Name}");
 		encounter = BuildCreatorRuntime.ReplaceEncounterIfNeeded(encounter, runState);
 	}
 }

@@ -10,6 +10,7 @@ internal static class SpeedControlBootstrapPatch
 {
 	private static void Postfix()
 	{
+		ModEntry.Verbose("SpeedControl: attached to game bootstrap");
 		SpeedControlOverlay.SetMainMenuVisible(visible: false);
 		SpeedControlOverlay.Show();
 	}

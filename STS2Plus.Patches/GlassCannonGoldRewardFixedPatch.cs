@@ -25,6 +25,7 @@ internal static class GlassCannonGoldRewardFixedPatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && PlusState.IsGlassCannonActive() && player != null)
 		{
+			ModEntry.Verbose($"GlassCannonGoldFixed: doubling gold amount={amount}");
 			amount = GameReflection.ApplyGoldBonus(amount, 2.0m);
 		}
 	}

@@ -150,6 +150,7 @@ internal static class SandboxEnemyHpPatch
 			int maxHp = GameReflection.GetMaxHp(__instance);
 			if (currentHp > 0 && maxHp > 0)
 			{
+				ModEntry.Verbose($"SandboxEnemyHp: setting enemy HP to 1 originalMax={maxHp}");
 				GameReflection.SetMaxHp(__instance, 1);
 				GameReflection.SetCurrentHp(__instance, 1);
 			}

@@ -26,6 +26,7 @@ internal static class GlassCannonGoldRewardRangePatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && PlusState.IsGlassCannonActive() && player != null)
 		{
+			ModEntry.Verbose($"GlassCannonGoldRange: doubling gold min={min} max={max}");
 			min = GameReflection.ApplyGoldBonus(min, 2.0m);
 			max = GameReflection.ApplyGoldBonus(max, 2.0m);
 		}

@@ -28,4 +28,7 @@ internal sealed class PlusConfig
 
 	public bool PlayerCombatShieldEnabled { get; set; } = true;
 
+
+	public bool VerboseLoggingEnabled { get; set; } = true;
+
 }

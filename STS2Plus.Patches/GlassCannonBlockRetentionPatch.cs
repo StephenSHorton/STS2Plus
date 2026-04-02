@@ -20,6 +20,7 @@ internal static class GlassCannonBlockRetentionPatch
 		if (PlusState.IsGlassCannonActive() && GameReflection.IsAnyPlayerCreature(__instance))
 		{
 			__state = GameReflection.GetCurrentBlock(__instance);
+			ModEntry.Verbose($"GlassCannonBlockRetention: saving block before turn block={__state}");
 		}
 	}
 
@@ -27,6 +28,7 @@ internal static class GlassCannonBlockRetentionPatch
 	{
 		if (__state > 0 && PlusState.IsGlassCannonActive() && GameReflection.IsAnyPlayerCreature(__instance) && !GameReflection.ShouldGamePreventBlockClear(__instance))
 		{
+			ModEntry.Verbose($"GlassCannonBlockRetention: retaining block retained={Math.Min(__state, 15)} cap=15");
 			GameReflection.SetCurrentBlock(__instance, Math.Min(__state, 15));
 		}
 	}

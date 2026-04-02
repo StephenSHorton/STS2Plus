@@ -21,6 +21,7 @@ internal static class MultiplayerRuleSyncCoordinator
 		//IL_003d: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0043: Invalid comparison between Unknown and I4
 		//IL_00c7: Unknown result type (might be due to invalid IL or missing references)
+		ModEntry.Verbose("RuleSync: attaching to current run");
 		if (!ConfigManager.Current.MoreRulesEnabled)
 		{
 			Detach();

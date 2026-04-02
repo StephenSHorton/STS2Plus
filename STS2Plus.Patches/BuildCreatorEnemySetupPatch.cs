@@ -10,6 +10,7 @@ internal static class BuildCreatorEnemySetupPatch
 {
 	private static void Postfix(Creature __instance)
 	{
+		ModEntry.Verbose($"BuildCreatorEnemySetup: normalizing enemy type={__instance?.GetType().Name}");
 		BuildCreatorRuntime.NormalizeEnemy(__instance);
 	}
 }

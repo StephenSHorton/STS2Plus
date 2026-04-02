@@ -10,6 +10,7 @@ internal static class SpeedControlCombatExitPatch
 {
 	private static void Prefix()
 	{
+		ModEntry.Verbose("SpeedControl: combat exit cleanup");
 		SpeedControlOverlay.SetMainMenuVisible(visible: false);
 		SpeedControlOverlay.Show();
 	}

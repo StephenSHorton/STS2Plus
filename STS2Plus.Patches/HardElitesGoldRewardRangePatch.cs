@@ -26,6 +26,7 @@ internal static class HardElitesGoldRewardRangePatch
 	{
 		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() && ShouldBoostGold(player))
 		{
+			ModEntry.Verbose($"HardElitesGoldRange: boosting gold min={min} max={max} multiplier=3.0");
 			min = GameReflection.ApplyGoldBonus(min, 3.0m);
 			max = GameReflection.ApplyGoldBonus(max, 3.0m);
 		}

@@ -18,6 +18,7 @@ internal static class BuildCreatorTurnHealPatch
 
 	private static void Prefix(CombatManager __instance)
 	{
+		ModEntry.Verbose("BuildCreatorTurnHeal: restoring enemy HP for turn");
 		BuildCreatorRuntime.RestoreEnemyHpForTurn(__instance.DebugOnlyGetState());
 	}
 }

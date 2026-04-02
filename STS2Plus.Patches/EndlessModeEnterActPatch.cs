@@ -19,6 +19,7 @@ internal static class EndlessModeEnterActPatch
 
 	private static void Postfix()
 	{
+		ModEntry.Verbose("EndlessModeEnterAct: act entry refreshing overlay");
 		EndlessModeOverlay.Refresh();
 	}
 }

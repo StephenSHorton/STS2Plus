@@ -28,6 +28,7 @@ internal static class PlayerDamageTracker
 	{
 		try
 		{
+			ModEntry.Verbose("PlayerDamageTracker: recalculate started");
 			if (!ConfigManager.Current.PlayerCombatShieldEnabled)
 			{
 				Hide();

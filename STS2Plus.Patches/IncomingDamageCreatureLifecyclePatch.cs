@@ -16,6 +16,7 @@ internal static class IncomingDamageCreatureLifecyclePatch
 		Creature entity = __instance.Entity;
 		if (entity != null && GameReflection.IsLocalPlayerObject(entity))
 		{
+			ModEntry.Verbose("IncomingDamage: creature ready, attaching overlay");
 			IncomingDamageOverlay.Attach((Node)(object)__instance, entity);
 		}
 	}
