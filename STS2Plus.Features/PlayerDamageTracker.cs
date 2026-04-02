@@ -84,13 +84,21 @@ internal static class PlayerDamageTracker
 				}
 			}
 			int num2 = Math.Max(0, val2.Block);
-			if (num <= 0 && num2 <= 0)
+			int ostyHp = 0;
+			foreach (Creature pet in val2.Pets)
+			{
+				if (pet != null && !pet.IsDead && pet.IsPet)
+				{
+					ostyHp += Math.Max(0, pet.CurrentHp);
+				}
+			}
+			if (num <= 0 && num2 <= 0 && ostyHp <= 0)
 			{
 				Hide();
 			}
 			else
 			{
-				ShowLabel(val2, num, num2);
+				ShowLabel(val2, num, num2, ostyHp);
 			}
 		}
 		catch (Exception value)
@@ -107,17 +115,8 @@ internal static class PlayerDamageTracker
 		}
 	}
 
-	private static void ShowLabel(Creature creature, int incomingDamage, int block)
+	private static void ShowLabel(Creature creature, int incomingDamage, int block, int ostyHp = 0)
 	{
-		//IL_00db: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00e0: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00e5: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00ea: Unknown result type (might be due to invalid IL or missing references)
-		//IL_015c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_015e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_016e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_017f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_018f: Unknown result type (might be due to invalid IL or missing references)
 		NCombatRoom instance = NCombatRoom.Instance;
 		if (instance == null)
 		{
@@ -145,8 +144,10 @@ internal static class PlayerDamageTracker
 				((CanvasItem)badge).Visible = false;
 				return;
 			}
-			int num = block - incomingDamage;
-			int num2 = Math.Max(0, incomingDamage - block);
+			// Factor in Osty (pet) HP as a damage buffer after block
+			int totalDefense = block + ostyHp;
+			int num = totalDefense - incomingDamage;
+			int num2 = Math.Max(0, incomingDamage - totalDefense);
 			bool lethal = num2 >= creature.CurrentHp;
 			Color accent = ResolveColor(num, lethal);
 			Color background = ResolveBackgroundColor(num, lethal);

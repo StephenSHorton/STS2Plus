@@ -272,11 +272,27 @@ internal static class SpeedControlOverlay
 		{
 			return false;
 		}
-		if (val == null || !GodotObject.IsInstanceValid((GodotObject)(object)val))
+		if (val != null && GodotObject.IsInstanceValid((GodotObject)(object)val))
 		{
-			return false;
+			bool isOpen = (AccessTools.Property(type, "IsOpen")?.GetValue(val) as bool?).GetValueOrDefault();
+			if (isOpen)
+			{
+				return true;
+			}
 		}
-		return (AccessTools.Property(type, "IsOpen")?.GetValue(val) as bool?).GetValueOrDefault() && ((CanvasItem)val).IsVisibleInTree();
+		// Fallback: allow speed controls whenever a run is active
+		try
+		{
+			RunManager runManager = RunManager.Instance;
+			if (runManager != null && runManager.DebugOnlyGetState() != null)
+			{
+				return true;
+			}
+		}
+		catch
+		{
+		}
+		return false;
 	}
 
 	private static bool IsBlockingUiOpen()
