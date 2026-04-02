@@ -20,16 +20,23 @@ internal static class EndlessModeArchitectWinRunPatch
 
 	private static bool Prefix(ref Task? __result)
 	{
-		if (!MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() || !PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(null))
+		if (!PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(null))
 		{
 			return true;
 		}
-		ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation.", 1);
-		Type type = RuntimeTypeResolver.FindType("MegaCrit.Sts2.Core.Runs.RunManager");
-		object obj = (((object)type == null) ? null : AccessTools.Property(type, "Instance")?.GetValue(null));
-		if (obj != null)
+		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches())
 		{
-			GameReflection.TriggerEndlessLoop(obj);
+			ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation (host/singleplayer).", 1);
+			Type type = RuntimeTypeResolver.FindType("MegaCrit.Sts2.Core.Runs.RunManager");
+			object obj = (((object)type == null) ? null : AccessTools.Property(type, "Instance")?.GetValue(null));
+			if (obj != null)
+			{
+				GameReflection.TriggerEndlessLoop(obj);
+			}
+		}
+		else
+		{
+			ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation (client).", 1);
 		}
 		__result = Task.CompletedTask;
 		EndlessModeOverlay.Refresh();

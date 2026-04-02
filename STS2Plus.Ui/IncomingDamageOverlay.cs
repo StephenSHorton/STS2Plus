@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using STS2Plus.Config;
 using STS2Plus.Features;
 using STS2Plus.Reflection;
 
@@ -27,6 +28,26 @@ internal sealed class IncomingDamageOverlay : PanelContainer
 
 	public static void Attach(Node creatureNode, object creatureEntity)
 	{
+		if (!ConfigManager.Current.PlayerCombatShieldEnabled)
+		{
+			return;
+		}
+		if (!GodotObject.IsInstanceValid((GodotObject)(object)creatureNode))
+		{
+			return;
+		}
+		if (Instances.TryGetValue(creatureNode, out IncomingDamageOverlay value) && GodotObject.IsInstanceValid((GodotObject)(object)value))
+		{
+			value.Bind(creatureNode, creatureEntity);
+			return;
+		}
+		PruneInvalidInstances();
+		IncomingDamageOverlay incomingDamageOverlay = new IncomingDamageOverlay();
+		((Node)incomingDamageOverlay).Name = (StringName)OverlayNodeName;
+		value = incomingDamageOverlay;
+		Instances[creatureNode] = value;
+		creatureNode.AddChild((Node)(object)value, false, (Node.InternalMode)0);
+		value.Bind(creatureNode, creatureEntity);
 	}
 
 	public static void Detach()
@@ -48,6 +69,11 @@ internal sealed class IncomingDamageOverlay : PanelContainer
 
 	public static void RequestRefresh()
 	{
+		PruneInvalidInstances();
+		foreach (IncomingDamageOverlay overlay in Instances.Values)
+		{
+			overlay.needsRefresh = true;
+		}
 	}
 
 	public override void _Ready()

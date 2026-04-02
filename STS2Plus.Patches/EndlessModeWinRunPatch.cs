@@ -20,12 +20,20 @@ internal static class EndlessModeWinRunPatch
 
 	private static bool Prefix(object __instance, ref Task? __result)
 	{
-		if (!MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() || !PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(__instance))
+		if (!PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(__instance))
 		{
 			return true;
 		}
-		ModEntry.Logger.Info("STS2Plus endless loop intercepting WinRun.", 1);
-		GameReflection.TriggerEndlessLoop(__instance);
+		ModEntry.Verbose("EndlessMode: intercepting WinRun");
+		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches())
+		{
+			ModEntry.Logger.Info("STS2Plus endless loop intercepting WinRun (host/singleplayer).", 1);
+			GameReflection.TriggerEndlessLoop(__instance);
+		}
+		else
+		{
+			ModEntry.Logger.Info("STS2Plus endless loop intercepting WinRun (client, waiting for host).", 1);
+		}
 		__result = Task.CompletedTask;
 		EndlessModeOverlay.Refresh();
 		return false;

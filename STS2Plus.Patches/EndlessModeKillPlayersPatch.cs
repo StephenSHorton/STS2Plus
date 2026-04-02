@@ -19,7 +19,7 @@ internal static class EndlessModeKillPlayersPatch
 
 	private static bool Prefix(object __instance, ref Task? __result)
 	{
-		if (!MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches() || !PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(__instance))
+		if (!PlusState.IsEndlessModeActive() || !GameReflection.ShouldStartEndlessLoop(__instance))
 		{
 			return true;
 		}
