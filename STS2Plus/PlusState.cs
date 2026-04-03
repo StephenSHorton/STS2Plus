@@ -229,10 +229,10 @@ internal static class PlusState
 		UnlimitedGrowthRuleSelected = GameReflection.HasActiveModifier("UNLIMITED_GROWTH");
 		SandboxRuleSelected = GameReflection.HasActiveModifier("SANDBOX");
 		BuildCreatorRuleSelected = GameReflection.HasActiveModifier("BUILD_CREATOR");
-		if (!HasAnySelectedRule() && GameReflection.HasDeprecatedModifier() && HasAnyPendingRule())
+		if (!HasAnySelectedRule() && HasAnyPendingRule())
 		{
 			RestorePendingSelections();
-			ModEntry.Logger.Warn("STS2Plus.MoreRules restored pending selections from deprecated run modifiers.", 1);
+			ModEntry.Logger.Warn("STS2Plus.MoreRules restored pending selections (modifiers not found in run state).", 1);
 		}
 		CaptureCachedDisplayEntries();
 		ModEntry.Logger.Info($"STS2Plus.MoreRules run-state sync: attack_defense={AttackDefenseRuleSelected}, attack_defense_plus={AttackDefensePlusRuleSelected}, iron_skin={IronSkinRuleSelected}, giant_creatures={GiantCreaturesRuleSelected}, hard_elites={HardElitesRuleSelected}, endless_mode={EndlessModeSelected}, glass_cannon={GlassCannonRuleSelected}, unlimited_growth={UnlimitedGrowthRuleSelected}, sandbox={SandboxRuleSelected}, build_creator={BuildCreatorRuleSelected}", 1);
