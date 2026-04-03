@@ -24,19 +24,21 @@ internal static class EndlessModeArchitectWinRunPatch
 		{
 			return true;
 		}
-		if (MultiplayerSafety.ShouldApplyAuthoritativeGameplayPatches())
+		// In multiplayer, let Architect.WinRun proceed normally so the event
+		// finishes for all players. RunManager.WinRun will be called after
+		// proper multiplayer sync, and EndlessModeWinRunPatch will catch it.
+		if (MultiplayerReflection.IsMultiplayerRun())
 		{
-			ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation (host/singleplayer).", 1);
-			Type type = RuntimeTypeResolver.FindType("MegaCrit.Sts2.Core.Runs.RunManager");
-			object obj = (((object)type == null) ? null : AccessTools.Property(type, "Instance")?.GetValue(null));
-			if (obj != null)
-			{
-				GameReflection.TriggerEndlessLoop(obj);
-			}
+			ModEntry.Logger.Info("STS2Plus endless loop deferring Architect.WinRun to RunManager in multiplayer.", 1);
+			return true;
 		}
-		else
+		// Singleplayer: trigger loop directly from Architect
+		ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation (singleplayer).", 1);
+		Type type = RuntimeTypeResolver.FindType("MegaCrit.Sts2.Core.Runs.RunManager");
+		object obj = (((object)type == null) ? null : AccessTools.Property(type, "Instance")?.GetValue(null));
+		if (obj != null)
 		{
-			ModEntry.Logger.Info("STS2Plus endless loop skipped TheArchitect.WinRun animation (client).", 1);
+			GameReflection.TriggerEndlessLoop(obj);
 		}
 		__result = Task.CompletedTask;
 		EndlessModeOverlay.Refresh();
